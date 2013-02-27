@@ -1,6 +1,10 @@
 !!!
 %html
   %head
-    %title= "Express Ya #{label}"
+    %title= "Express YA #{label}"
   %body
-    %h1 Hello
+    %h1= "Express YA #{label} !!1!"
+
+    %ul
+      - messages.each do |message|
+        %li= message
