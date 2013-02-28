@@ -1,15 +1,5 @@
 class Label
 
-  class << self
-
-    def from_subject(subject)
-      subject.split(' ').collect do |label|
-        self.new(label)
-      end
-    end
-
-  end
-
   def initialize(label)
     @label = label
   end
@@ -21,7 +11,7 @@ class Label
   private
 
   def label
-    @label.downcase.gsub(' ', '-')
+    @label.downcase.gsub(' ', '-').gsub('#', '')
   end
 
 end

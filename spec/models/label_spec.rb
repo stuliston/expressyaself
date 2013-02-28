@@ -17,10 +17,4 @@ describe Label do
     end
   end
 
-  describe '#from_subject' do
-
-    it 'returns an array of labels for a subject line' do
-      Label.from()
-    end
-  end
 end
