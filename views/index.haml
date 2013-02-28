@@ -8,6 +8,6 @@
     %table
       - messages.each do |message|
         %tr
-          %td= message.author_email
-          %td= message.author_name
+          %td
+            %img{ src: message.author_avatar, alt: message.author_name }
           %td= message.body

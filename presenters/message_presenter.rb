@@ -14,6 +14,11 @@ module ExpressYaSelf
       message.author_name
     end
 
+    def author_avatar
+      hash = Digest::MD5::hexdigest author_email.strip.downcase
+      "http://www.gravatar.com/avatar/#{hash}.jpg?s=80"
+    end
+
     def author_email
       message.author_email
     end
