@@ -1,10 +1,13 @@
 !!!
 %html
   %head
-    %title= "Express YA #{label}"
+    %title= "Express Ya #{label} !!1!"
   %body
-    %h1= "Express YA #{label} !!1!"
+    %h1= "Express Ya #{label} !!1!"
 
-    %ul
+    %table
       - messages.each do |message|
-        %li= message
+        %tr
+          %td= message.author_email
+          %td= message.author_name
+          %td= message.body

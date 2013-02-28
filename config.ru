@@ -4,4 +4,4 @@ require 'bundler'
 Bundler.require
 
 require './express'
-run ExpressYaSelf
+run Express
