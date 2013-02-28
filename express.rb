@@ -14,7 +14,7 @@ class Express < Sinatra::Base
   end
 
   get '/:tag' do
-    requested_label = params[:tag]
+    requested_tag = "##{params[:tag]}"
     messages = []
 
     GmailClient.instance.inbox.unread.each do |email|
@@ -24,7 +24,7 @@ class Express < Sinatra::Base
       email.archive!
     end
 
-    GmailClient.instance.label(requested_label).emails.each do |email|
+    GmailClient.instance.label(requested_tag).emails.each do |email|
       message = OpenStruct.new(
         author_name:  email.from.first.name,
         author_email: "#{email.from.first.mailbox}@#{email.from.first.host}",
@@ -34,7 +34,7 @@ class Express < Sinatra::Base
       messages << ExpressYaSelf::MessagePresenter.new(message)
     end
 
-    haml :index, locals: { tag: requested_label, messages: messages }
+    haml :index, locals: { tag: requested_tag, messages: messages }
   end
 
 end
