@@ -9,7 +9,7 @@ module ExpressYaSelf
     end
 
     def to_tags
-      (subject_line || '').scan(/(#[^#\s]+)/).flatten
+      @to_tags ||= (subject_line || '').scan(/(#[^#\s]+)/).flatten
     end
 
     private

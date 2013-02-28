@@ -2,7 +2,7 @@ require 'sinatra'
 require 'pry'
 require 'gmail'
 require 'ostruct'
-require './models/label'
+require './models/tag'
 require './presenters/message_presenter'
 
 class Express < Sinatra::Base
@@ -11,20 +11,22 @@ class Express < Sinatra::Base
     haml :home
   end
 
-  get '/:label' do
-    requested_label = ExpressYaSelf::Label.new(params[:label]).to_s
+  get '/:tag' do
+    requested_tag = ExpressYaSelf::Tag.new(params[:tag])
     messages = []
 
     Gmail.connect('xxpressyaself@gmail.com', 'pencilgoblin') do |gmail|
 
-      # label and archive any unread
       gmail.inbox.unread.each do |email|
-        email.move_to!(ExpressYaSelf::Label.new(email.subject).to_s)
+        ExpressYaSelf::Subject(email.subject).to_tags.each do |tag|
+          email.label(tag.to_label)
+        end
         email.read!
+        email.archive!
       end
 
-      # grab emails for label
-      gmail.label(requested_label).emails.each do |email|
+      # grab emails for tag
+      gmail.label(requested_tag.to_label).emails.each do |email|
         message = OpenStruct.new(
           author_name:  email.from.first.name,
           author_email: "#{email.from.first.mailbox}@#{email.from.first.host}",
@@ -36,7 +38,7 @@ class Express < Sinatra::Base
 
     end
 
-    haml :index, locals: { label: requested_label, messages: messages }
+    haml :index, locals: { tag: requested_tag.to_s, messages: messages }
   end
 
 end
