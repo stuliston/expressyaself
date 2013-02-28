@@ -7,7 +7,7 @@ module ExpressYaSelf
     end
 
     def to_s
-      "##{tag}"
+      tag
     end
 
     def to_label

@@ -3,6 +3,8 @@ require 'pry'
 require 'gmail'
 require 'ostruct'
 require './models/tag'
+require './models/subject'
+require './models/gmail_client'
 require './presenters/message_presenter'
 
 class Express < Sinatra::Base
@@ -12,33 +14,27 @@ class Express < Sinatra::Base
   end
 
   get '/:tag' do
-    requested_tag = ExpressYaSelf::Tag.new(params[:tag])
+    requested_label = params[:tag]
     messages = []
 
-    Gmail.connect('xxpressyaself@gmail.com', 'pencilgoblin') do |gmail|
-
-      gmail.inbox.unread.each do |email|
-        ExpressYaSelf::Subject(email.subject).to_tags.each do |tag|
-          email.label(tag.to_label)
-        end
-        email.read!
-        email.archive!
+    GmailClient.instance.inbox.unread.each do |email|
+      ExpressYaSelf::Subject.new(email.subject).to_tags.each do |tag|
+        email.label!(tag)
       end
-
-      # grab emails for tag
-      gmail.label(requested_tag.to_label).emails.each do |email|
-        message = OpenStruct.new(
-          author_name:  email.from.first.name,
-          author_email: "#{email.from.first.mailbox}@#{email.from.first.host}",
-          body:         email.parts.first.body
-        )
-
-        messages << ExpressYaSelf::MessagePresenter.new(message)
-      end
-
+      email.archive!
     end
 
-    haml :index, locals: { tag: requested_tag.to_s, messages: messages }
+    GmailClient.instance.label(requested_label).emails.each do |email|
+      message = OpenStruct.new(
+        author_name:  email.from.first.name,
+        author_email: "#{email.from.first.mailbox}@#{email.from.first.host}",
+        body:         (email.parts.first.body if email.parts.count > 0)
+      )
+
+      messages << ExpressYaSelf::MessagePresenter.new(message)
+    end
+
+    haml :index, locals: { tag: requested_label, messages: messages }
   end
 
 end

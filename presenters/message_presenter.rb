@@ -7,7 +7,7 @@ module ExpressYaSelf
     end
 
     def body
-      message.body
+      message.body || '[blank]'
     end
 
     def author_name

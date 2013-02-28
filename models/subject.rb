@@ -1,4 +1,4 @@
-require_relative 'label'
+require_relative 'tag'
 
 module ExpressYaSelf
 
