@@ -12,14 +12,14 @@ class Express < Sinatra::Base
   end
 
   get '/:label' do
-    requested_label = Label.new(params[:label]).to_s
+    requested_label = ExpressYaSelf::Label.new(params[:label]).to_s
     messages = []
 
     Gmail.connect('xxpressyaself@gmail.com', 'pencilgoblin') do |gmail|
 
       # label and archive any unread
       gmail.inbox.unread.each do |email|
-        email.move_to!(Label.new(email.subject).to_s)
+        email.move_to!(ExpressYaSelf::Label.new(email.subject).to_s)
         email.read!
       end
 

@@ -1,17 +1,21 @@
-class Label
+module ExpressYaSelf
 
-  def initialize(label)
-    @label = label
-  end
+  class Label
 
-  def to_s
-    label
-  end
+    def initialize(label)
+      @label = label
+    end
 
-  private
+    def to_s
+      label
+    end
 
-  def label
-    @label.downcase.gsub(' ', '-').gsub('#', '')
+    private
+
+    def label
+      @label.downcase.gsub(' ', '-').gsub('#', '')
+    end
+
   end
 
 end
