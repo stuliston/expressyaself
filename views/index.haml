@@ -8,7 +8,7 @@
 
     -if messages.empty?
       %ul
-        %li.message
+        %li
           %img{ src: 'images/code-21.gif' }
           %p
             OH SNAP! Nothing to show <br/><br/>
@@ -19,6 +19,6 @@
     -else
       %ul
         - messages.each do |message|
-          %li
-            %img{ src: message.author_avatar, alt: message.author_name }
+          %li.message
+            %img{ src: message.author_avatar, tooltip: message.author_name }
             %p= message.body
