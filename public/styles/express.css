@@ -53,10 +53,26 @@ li img {
 li p {
   margin: 0;
   font-size: 15px;
+  line-height: 1.5em;
 }
+
+li p::selection {
+  background: hotpink; /* Safari */
+}
+li p::-moz-selection {
+  background: hotpink; /* Firefox */
+}
+
+li p:hover::selection {
+  background: #000; /* Safari */
+}
+
+li p:hover::-moz-selection {
+  background: #000; /* Firefox */
+}
+
 
 li:hover {
   background-color: hotpink;
   color: #fff;
-  line-height: 1.5em;
 }
