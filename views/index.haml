@@ -1,13 +1,13 @@
 !!!
 %html
   %head
-    %title= "Express Ya #{tag} !!1!"
+    %title= "Express Ya #{tag}"
+    %link(rel="stylesheet" href="styles/express.css")
   %body
-    %h1= "Express Ya <span style='color: #fff; background: hotpink; padding: 5px;'>#{tag}</span> !!1!"
+    %h1= "Express Ya <span class='tag'>#{tag}</span><span class='arrow-down'></span>"
 
-    %table
+    %ul
       - messages.each do |message|
-        %tr
-          %td
-            %img{ src: message.author_avatar, alt: message.author_name }
-          %td= message.body
+        %li
+          %img{ src: message.author_avatar, alt: message.author_name }
+          %p= message.body

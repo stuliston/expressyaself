@@ -3,5 +3,5 @@ require 'bundler'
 
 Bundler.require
 
-require './express'
-run Express
+require './app'
+run ExpressYaSelf::App

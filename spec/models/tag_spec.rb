@@ -1,4 +1,4 @@
-require_relative '../../models/tag'
+require './models/tag'
 
 describe Tag do
 

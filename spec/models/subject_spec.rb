@@ -1,4 +1,4 @@
-require_relative '../../models/subject'
+require './models/subject'
 
 module ExpressYaSelf
 

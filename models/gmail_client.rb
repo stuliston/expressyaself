@@ -1,13 +1,17 @@
 require 'delegate'
 require 'singleton'
 
-class GmailClient < SimpleDelegator
+module ExpressYaSelf
 
-  include Singleton
+  class GmailClient < SimpleDelegator
 
-  def initialize
-    client = Gmail.connect('xxpressyaself@gmail.com', 'pencilgoblin')
-    super(client)
+    include Singleton
+
+    def initialize
+      client = Gmail.connect('xxpressyaself@gmail.com', 'pencilgoblin')
+      super(client)
+    end
+
   end
 
 end

@@ -1,0 +1,62 @@
+@import url(http://fonts.googleapis.com/css?family=Strait);
+
+body {
+  width: 600px;
+  margin: 0 auto;
+  background-image: url('../images/squares.png');
+  font-family: 'Strait', sans-serif;
+}
+
+h1 {
+  color: #fff;
+  font-size: 40px;
+  position: relative;
+}
+
+h1 span.tag {
+  color: #fff;
+  background-color: hotpink;
+  padding: 5px;
+}
+
+span.arrow-down {
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid hotpink;
+  position: relative;
+  top: 69px;
+  right: 58px;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  background-color: #fff;
+  margin-bottom: 15px;
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px;
+  float: left;
+}
+
+li img {
+  float: left;
+  margin-right: 15px;
+}
+
+li p {
+  margin: 0;
+  font-size: 15px;
+}
+
+li:hover {
+  background-color: hotpink;
+  color: #fff;
+  line-height: 1.5em;
+}

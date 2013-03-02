@@ -1,11 +1,11 @@
 require 'ostruct'
-require_relative '../../presenters/message_presenter'
+require './presenters/email_presenter'
 
 module ExpressYaSelf
 
-  describe MessagePresenter do
+  describe EmailPresenter do
 
-    subject { MessagePresenter.new(message) }
+    subject { EmailPresenter.new(message) }
 
     describe '#author_name' do
 
