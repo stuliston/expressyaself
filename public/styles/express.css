@@ -35,7 +35,7 @@ ul {
   padding: 0;
 }
 
-li {
+li.message {
   list-style: none;
   background-color: #fff;
   margin-bottom: 15px;
@@ -45,34 +45,44 @@ li {
   float: left;
 }
 
-li img {
+li.message img {
   float: left;
   margin-right: 15px;
 }
 
-li p {
+li.message p {
   margin: 0;
   font-size: 15px;
   line-height: 1.5em;
 }
 
-li p::selection {
+li.message p::selection {
   background: hotpink; /* Safari */
 }
-li p::-moz-selection {
+li.message p::-moz-selection {
   background: hotpink; /* Firefox */
 }
 
-li p:hover::selection {
+li.message p:hover::selection {
   background: #000; /* Safari */
 }
 
-li p:hover::-moz-selection {
+li.message p:hover::-moz-selection {
   background: #000; /* Firefox */
 }
 
 
-li:hover {
+li.message:hover {
   background-color: hotpink;
   color: #fff;
+}
+
+ul.instructions {
+  list-style-type: decimal;
+  display: block;
+  float: left;
+  margin-left: 20px;
+  width: 240px;
+  font-size: 14px;
+  line-height: 1.5em;
 }

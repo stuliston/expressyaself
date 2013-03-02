@@ -6,8 +6,19 @@
   %body
     %h1= "ExpressYaself.in <span class='tag'>#{tag}</span><span class='arrow-down'></span>"
 
-    %ul
-      - messages.each do |message|
-        %li
-          %img{ src: message.author_avatar, alt: message.author_name }
-          %p= message.body
+    -if messages.empty?
+      %ul
+        %li.message
+          %img{ src: 'images/code-21.gif' }
+          %p
+            OH SNAP! Nothing to show <br/><br/>
+            %ul.instructions
+              %li Think of something insightful to say
+              %li= "Email xxpressyaself@gmail.com with #{tag} in the subject"
+              %li Reload this page!
+    -else
+      %ul
+        - messages.each do |message|
+          %li
+            %img{ src: message.author_avatar, alt: message.author_name }
+            %p= message.body
