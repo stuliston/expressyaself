@@ -1,6 +1,12 @@
 !!!
 %html
   %head
-    %title Express yaself
+    %title ExpressYaself.in
+    %link(rel="stylesheet" href="styles/express.css")
   %body
-    %h1 EXPRESS YASELF!
+    %h1= "ExpressYaself.in <span class='tag'>#tags</span><span class='arrow-down'></span>"
+
+    %ul
+      - labels.each do |label|
+        %li.message
+          %a{ href: "/#{label.gsub('#','')}" }=label
