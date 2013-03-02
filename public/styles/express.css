@@ -59,6 +59,7 @@ li.message p {
 li.message p::selection {
   background: hotpink; /* Safari */
 }
+
 li.message p::-moz-selection {
   background: hotpink; /* Firefox */
 }
@@ -70,7 +71,6 @@ li.message p:hover::selection {
 li.message p:hover::-moz-selection {
   background: #000; /* Firefox */
 }
-
 
 li.message:hover {
   background-color: hotpink;

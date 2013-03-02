@@ -26,6 +26,8 @@ module ExpressYaSelf
         email.archive!
       end
 
+      GmailClient.instance.labels.new(requested_tag)
+
       # catch Net::IMAP::NoResponseError
       GmailClient.instance.label(requested_tag).emails.each do |email|
         message = OpenStruct.new(
