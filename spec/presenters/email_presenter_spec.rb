@@ -3,9 +3,9 @@ require './presenters/email_presenter'
 
 module ExpressYaSelf
 
-  describe EmailPresenter do
+  describe MessagePresenter do
 
-    subject { EmailPresenter.new(message) }
+    subject { MessagePresenter.new(message) }
 
     describe '#author_name' do
 

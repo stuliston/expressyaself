@@ -1,11 +1,10 @@
-require 'sinatra'
+require 'sinatra/base'
 require 'pry'
 require 'gmail'
-require 'ostruct'
-require './models/tag'
-require './models/subject'
-require './models/gmail_client'
-require './presenters/email_presenter'
+require './models/init'
+require './presenters/message_presenter'
+
+Mongoid.load!("mongoid.yml")
 
 module ExpressYaSelf
 
@@ -18,29 +17,11 @@ module ExpressYaSelf
 
     get '/:tag' do
       requested_tag = "##{params[:tag]}"
-      messages = []
 
-      GmailClient.instance.inbox.unread.each do |email|
-        Subject.new(email.subject).to_tags.each do |tag|
-          email.label!(tag)
-        end
-        email.archive!
+      messages = Message.where(:tags.in => [ requested_tag ]).collect do |m|
+        MessagePresenter.new(m)
       end
 
-      GmailClient.instance.labels.new(requested_tag)
-
-      # catch Net::IMAP::NoResponseError
-      GmailClient.instance.label(requested_tag).emails.each do |email|
-        message = OpenStruct.new(
-          author_name:  email.from.first.name,
-          author_email: "#{email.from.first.mailbox}@#{email.from.first.host}",
-          body:         (email.parts.first.body if email.parts.count > 0)
-        )
-
-        messages << EmailPresenter.new(message)
-      end
-
-      messages.reverse!
       haml :index, locals: { tag: requested_tag, messages: messages }
     end
 

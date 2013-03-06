@@ -1,21 +1,21 @@
 module ExpressYaSelf
 
-  class EmailPresenter
+  class MessagePresenter
 
-    def initialize(email)
-      @email = email
+    def initialize(message)
+      @message = message
     end
 
     def body
-      email.body || '[blank]'
+      message.body || '[blank]'
     end
 
     def author_name
-      email.author_name
+      message.author_name
     end
 
     def author_email
-      email.author_email
+      message.author_email
     end
 
     def author_avatar
@@ -25,7 +25,7 @@ module ExpressYaSelf
 
     private
 
-    attr_reader :email
+    attr_reader :message
 
   end
 
