@@ -8,7 +8,7 @@ module ExpressYaSelf
     field :body,          type: String
     field :author_name,   type: String
     field :author_email,  type: String
-    field :created_at,    type: DateTime
+    field :sent_at,       type: DateTime
     field :tags,          type: Array
 
     def self.from_email(email)
