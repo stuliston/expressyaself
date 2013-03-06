@@ -3,12 +3,12 @@ module ExpressYaSelf
 
     class EmailMessageAdapter
 
-      def initialize(message)
-        @message = message
+      def initialize(email)
+        @email = email
       end
 
       def to_h
-        {
+        @to_h ||= {
           body:         body,
           author_name:  author_name,
           author_email: author_email,
@@ -18,22 +18,29 @@ module ExpressYaSelf
 
       private
 
-      attr_reader :message
+      attr_reader :email
 
       def body
-        message.body rescue message.parts.first
+        @boody ||= begin
+          part = email.message.parts.first || email
+          part.body.to_s
+        end
       end
 
       def author_name
-        message.from.first.name
+        @author_name ||= email.from.first.name
       end
 
       def author_email
-        "#{message.from.first.mailbox}@#{message.from.first.host}"
+        @author_email ||= "#{email.from.first.mailbox}@#{email.from.first.host}"
       end
 
       def tags
-        @tags ||= TagList.from_subject_line(message.subject)
+        @tags ||= TagList.from_subject_line(email.subject)
+      end
+
+      def sent_at
+        @sent_at ||= email.message.date
       end
 
     end
