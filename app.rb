@@ -11,8 +11,7 @@ module ExpressYaSelf
   class App < Sinatra::Base
 
     get '/' do
-      labels = GmailClient.instance.labels.all.reject! { |label| !label.start_with?('#') }
-      haml :home, locals: { labels: labels }
+      haml :home, locals: { labels: Message.distinct(:tags) }
     end
 
     get '/:tag' do
