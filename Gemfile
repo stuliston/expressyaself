@@ -9,6 +9,7 @@ gem 'mongoid'
 gem 'bson_ext'
 gem 'thor'
 
-group :development do
+group :development, :test do
   gem 'rspec'
+  gem 'rake'
 end
