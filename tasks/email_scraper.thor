@@ -8,19 +8,24 @@ Mongoid.load!("mongoid.yml")
 
 class EmailScraper < Thor
 
-  desc "process_unread PASSWORD", "Scrape email inbox for emails. Label, archive and persist in DB"
-  def process_unread(password)
+  # Trick heroku
+  5.times.each do |i|
 
-    Gmail.connect('xxpressyaself@gmail.com', password) do |gmail|
+    desc "process_unread#{i} PASSWORD", "Scrape email inbox for emails. Label, archive and persist in DB"
+    define_method "process_unread#{i}".to_sym do |password|
 
-      gmail.inbox.find(:unread).each do |email|
+      Gmail.connect('xxpressyaself@gmail.com', password) do |gmail|
 
-        adapted_email = ::ExpressYaSelf::Message.from_email(email)
-        adapted_email.save!
+        gmail.inbox.find(:unread).each do |email|
 
-        adapted_email.tags.each { |tag| email.label!(tag) }
-        email.archive!
+          adapted_email = ::ExpressYaSelf::Message.from_email(email)
+          adapted_email.save!
+
+          adapted_email.tags.each { |tag| email.label!(tag) }
+          email.archive!
+        end
       end
     end
+
   end
 end
