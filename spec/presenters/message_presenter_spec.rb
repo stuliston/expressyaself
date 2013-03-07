@@ -30,7 +30,6 @@ module ExpressYaSelf
       let(:message) { double(body: body) }
 
       context 'when the body is nil' do
-
         let(:body)  { nil }
 
         it 'is [blank]' do
