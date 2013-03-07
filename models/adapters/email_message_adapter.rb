@@ -1,3 +1,5 @@
+require './models/tag_list'
+
 module ExpressYaSelf
   module Adapters
 
@@ -12,7 +14,8 @@ module ExpressYaSelf
           body:         body,
           author_name:  author_name,
           author_email: author_email,
-          tags:         tags
+          tags:         tags,
+          sent_at:      sent_at
         }
       end
 
@@ -21,10 +24,7 @@ module ExpressYaSelf
       attr_reader :email
 
       def body
-        @boody ||= begin
-          part = email.message.parts.first || email
-          part.body.to_s
-        end
+        @boody ||= (email.message.parts.first || email).body.to_s
       end
 
       def author_name
