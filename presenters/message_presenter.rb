@@ -7,7 +7,7 @@ module ExpressYaSelf
     end
 
     def body
-      message.body || '[blank]'
+      (message.body || '[blank]').gsub("\n", '<br/>')
     end
 
     def author_name
