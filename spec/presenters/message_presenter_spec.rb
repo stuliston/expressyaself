@@ -14,7 +14,6 @@ module ExpressYaSelf
       it 'has the correct name' do
         subject.author_name.should == author_name
       end
-
     end
 
     describe '#author_email' do
@@ -35,7 +34,6 @@ module ExpressYaSelf
         it 'is [blank]' do
           subject.body.should == '[blank]'
         end
-
       end
 
       context 'when the body has a value' do
@@ -44,10 +42,15 @@ module ExpressYaSelf
         it 'is a value' do
           subject.body.should == 'a value'
         end
+      end
 
+      context 'when the body contains a newline' do
+        let(:body)  { "a value\nSome text on a new line" }
+
+        it 'is coverts the newline to a <br/>' do
+          subject.body.should == "a value<br/>Some text on a new line"
+        end
       end
     end
-
   end
-
 end
