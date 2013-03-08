@@ -24,7 +24,15 @@ module ExpressYaSelf
       attr_reader :email
 
       def body
-        @boody ||= (email.message.parts.first || email).body.to_s
+        @boody ||= set_encoding relevant_email_part.body.to_s
+      end
+
+      def relevant_email_part
+        email.message.parts.first || email
+      end
+
+      def set_encoding(str)
+        str.force_encoding("ASCII-8BIT").encode('UTF-8', undef: :replace, replace: '')
       end
 
       def author_name
