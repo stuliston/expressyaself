@@ -1,23 +1,6 @@
-!!!
-%html
-  %head
-    %title ExpressYaself.in
-    %link(rel="stylesheet" href="styles/express.css")
-    :javascript
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-38964465-1']);
-      _gaq.push(['_trackPageview']);
+%h1= "ExpressYaself.in <span class='tag'>#tags</span><span class='arrow-down'></span>"
 
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-
-  %body
-    %h1= "ExpressYaself.in <span class='tag'>#tags</span><span class='arrow-down'></span>"
-
-    %ul
-      - labels.each do |label|
-        %li.message
-          %a{ href: "/#{label.gsub('#','')}" }=label
+%ul
+  - labels.each do |label|
+    %li.message
+      %a{ href: "/#{label.gsub('#','')}" }=label
