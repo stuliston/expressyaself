@@ -7,13 +7,14 @@ body {
   font-family: 'Strait', sans-serif;
 }
 
-h1 {
+h1 a {
   color: #fff;
   font-size: 40px;
   position: relative;
+  text-decoration: none;
 }
 
-h1 span.tag {
+h1 a span.tag {
   color: #fff;
   background-color: hotpink;
   padding: 5px;
