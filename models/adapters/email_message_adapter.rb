@@ -10,7 +10,7 @@ module ExpressYaSelf
       end
 
       def to_h
-        @to_h ||= {
+        {
           body:         body,
           author_name:  author_name,
           author_email: author_email,
@@ -36,11 +36,15 @@ module ExpressYaSelf
       end
 
       def author_name
-        @author_name ||= email.from.first.name
+        @author_name ||= from.first.name
       end
 
       def author_email
-        @author_email ||= "#{email.from.first.mailbox}@#{email.from.first.host}"
+        @author_email ||= "#{from.mailbox}@#{from.host}"
+      end
+
+      def from
+        @from ||= email.from.first
       end
 
       def tags
