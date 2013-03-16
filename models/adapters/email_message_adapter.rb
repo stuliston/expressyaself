@@ -36,7 +36,7 @@ module ExpressYaSelf
       end
 
       def author_name
-        @author_name ||= from.first.name
+        @author_name ||= from.name
       end
 
       def author_email
