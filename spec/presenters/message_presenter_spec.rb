@@ -1,7 +1,7 @@
 require 'ostruct'
 require './presenters/message_presenter'
 
-module ExpressYaSelf
+module ExpressYaself
 
   describe MessagePresenter do
 

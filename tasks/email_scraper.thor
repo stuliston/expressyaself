@@ -1,45 +1,19 @@
 require 'sinatra/base'
-require 'pry'
-require 'gmail'
-require 'ostruct'
-require './models/init'
+require './models/gmail_client'
 
 Mongoid.load!("mongoid.yml")
 
 class EmailScraper < Thor
 
-  INBOX = 'xxpressyaselfdev@gmail.com'
+  EMAIL_INBOX = 'xxpressyaselfdev@gmail.com'
 
   # Trick heroku into thinking we have 5 unique email scraper tasks
   5.times.each do |i|
-    create_process_unread_task(i)
-  end
 
-  private
-
-  def create_process_unread_task(index)
-    desc "process_unread#{index} PASSWORD", "Scrape email inbox for emails. Label, archive and persist in DB"
-    define_method "process_unread#{index}".to_sym do |password|
-
-      with_gmail_connection(password) do |gmail|
-        gmail.inbox.find(:unread).each do |email|
-
-          adapted_email = ::ExpressYaSelf::Message.from_email(email)
-          adapted_email.save!
-
-          label_email(email, adapted_email.tags)
-          email.archive!
-        end
-      end
+    desc "process_unread#{i} PASSWORD", "Scrape email inbox for emails. Label, archive and persist in DB"
+    define_method "process_unread#{i}".to_sym do |password|
+      ExpressYaself::GmailClient.new(EMAIL_INBOX, password).process_unread
     end
-  end
 
-  def with_gmail_connection(password, &block)
-    Gmail.connect(INBOX, password, &block)
   end
-
-  def label_email(email, tags)
-    tags.each { |tag| email.label!(tag) }
-  end
-
 end

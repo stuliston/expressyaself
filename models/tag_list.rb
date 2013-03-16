@@ -1,4 +1,4 @@
-module ExpressYaSelf
+module ExpressYaself
 
   class TagList < Array
 

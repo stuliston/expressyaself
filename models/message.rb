@@ -1,7 +1,7 @@
 require 'mongoid'
 require './models/adapters/email_message_adapter'
 
-module ExpressYaSelf
+module ExpressYaself
   class Message
     include Mongoid::Document
 

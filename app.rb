@@ -6,7 +6,7 @@ require './presenters/message_presenter'
 
 Mongoid.load!("mongoid.yml")
 
-module ExpressYaSelf
+module ExpressYaself
 
   class App < Sinatra::Base
 

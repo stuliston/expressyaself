@@ -1,6 +1,6 @@
 require './models/tag_list'
 
-module ExpressYaSelf
+module ExpressYaself
   module Adapters
 
     class EmailMessageAdapter

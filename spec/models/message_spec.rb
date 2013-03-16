@@ -1,6 +1,6 @@
 require './models/message'
 
-module ExpressYaSelf
+module ExpressYaself
 
   describe Message do
 

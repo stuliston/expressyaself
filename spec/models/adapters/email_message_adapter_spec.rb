@@ -1,7 +1,7 @@
 require './spec/support/spec_helper'
 require './models/adapters/email_message_adapter'
 
-module ExpressYaSelf
+module ExpressYaself
   module Adapters
 
     describe EmailMessageAdapter do
