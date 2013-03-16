@@ -10,7 +10,7 @@ class EmailScraper < Thor
 
   INBOX = 'xxpressyaselfdev@gmail.com'
 
-  # Trick heroku
+  # Trick heroku into thinking we have 5 unique email scraper tasks
   5.times.each do |i|
 
     desc "process_unread#{i} PASSWORD", "Scrape email inbox for emails. Label, archive and persist in DB"
