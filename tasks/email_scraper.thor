@@ -8,13 +8,18 @@ Mongoid.load!("mongoid.yml")
 
 class EmailScraper < Thor
 
-  INBOX = 'xxpressyaself@gmail.com'
+  INBOX = 'xxpressyaselfdev@gmail.com'
 
   # Trick heroku into thinking we have 5 unique email scraper tasks
   5.times.each do |i|
+    create_process_unread_task(i)
+  end
 
-    desc "process_unread#{i} PASSWORD", "Scrape email inbox for emails. Label, archive and persist in DB"
-    define_method "process_unread#{i}".to_sym do |password|
+  private
+
+  def create_process_unread_task(index)
+    desc "process_unread#{index} PASSWORD", "Scrape email inbox for emails. Label, archive and persist in DB"
+    define_method "process_unread#{index}".to_sym do |password|
 
       with_gmail_connection(password) do |gmail|
         gmail.inbox.find(:unread).each do |email|
@@ -27,10 +32,7 @@ class EmailScraper < Thor
         end
       end
     end
-
   end
-
-  private
 
   def with_gmail_connection(password, &block)
     Gmail.connect(INBOX, password, &block)
