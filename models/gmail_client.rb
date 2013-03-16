@@ -5,25 +5,29 @@ module ExpressYaself
 
   class GmailClient
 
-    def initialize(email, password)
-      @email = email
+    def initialize(email_address, password)
+      @email_address = email_address
       @password = password
+      validate_args!
     end
 
     def process_unread
-      with_connection do |gmail_connection|
-        unread_emails(gmail_connection).each { |email| process(email) }
+      with_gmail_connection do |gmail|
+        gmail.inbox.find(:unread).each { |email| process(email) }
       end
     end
 
     private
 
-    def with_connection(&block)
-      Gmail.connect(email, password, &block)
+    attr_reader :email_address, :password
+
+    def validate_args!
+      raise ArgumentError, 'email_address is blank' if email_address.blank?
+      raise ArgumentError, 'password is blank'      if password.blank?
     end
 
-    def unread_emails(gmail_connection)
-      gmail_connection.inbox.find(:unread)
+    def with_gmail_connection(&block)
+      Gmail.connect(email_address, password, &block)
     end
 
     def process(email)
@@ -38,14 +42,14 @@ module ExpressYaself
     end
 
     def label(email, tags)
-      tags.each { |tag| email.label!(tag) }
+      tags.each do |tag|
+        email.label!(tag)
+      end
     end
 
     def archive(email)
       email.archive!
     end
-
-    attr_reader :email, :password
 
   end
 

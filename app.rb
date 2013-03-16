@@ -1,14 +1,17 @@
-require 'sinatra/base'
 require 'pry'
-require 'gmail'
+require 'sinatra/base'
 require './models/init'
 require './presenters/message_presenter'
+require 'yaml'
 
 Mongoid.load!("mongoid.yml")
 
 module ExpressYaself
 
   class App < Sinatra::Base
+
+    # set config settings (http://www.sinatrarb.com/configuration.html)
+    set YAML.load_file('config.yml')[environment.to_s]
 
     get '/' do
       haml :home, locals: { labels: Message.distinct(:tags) }

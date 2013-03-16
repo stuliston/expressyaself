@@ -1,0 +1,12 @@
+defaults: &defaults
+  email_inbox: 'xxpressyaselfdev@gmail.com'
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  email_inbox: 'xxpressyaself@gmail.com'

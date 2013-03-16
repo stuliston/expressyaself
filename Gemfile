@@ -14,4 +14,5 @@ gem 'thor'
 group :development, :test do
   gem 'rspec'
   gem 'rake'
+  gem 'vcr'
 end
