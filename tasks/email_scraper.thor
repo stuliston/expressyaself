@@ -8,7 +8,7 @@ Mongoid.load!("mongoid.yml")
 
 class EmailScraper < Thor
 
-  INBOX = 'xxpressyaselfdev@gmail.com'
+  INBOX = 'xxpressyaself@gmail.com'
 
   # Trick heroku into thinking we have 5 unique email scraper tasks
   5.times.each do |i|
