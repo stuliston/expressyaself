@@ -42,9 +42,7 @@ module ExpressYaself
     end
 
     def label(email, tags)
-      tags.each do |tag|
-        email.label!(tag)
-      end
+      tags.each { |tag| email.label!(tag) }
     end
 
     def archive(email)
