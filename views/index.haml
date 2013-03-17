@@ -1,3 +1,16 @@
+:javascript
+
+  $(function() {
+   var faye = new Faye.Client('http://192.168.1.109:1337/faye/faye');
+   faye.subscribe("/messages/#{tag[1, tag.length]}", function (data) {
+   var message = JSON.parse(data);
+   $('.messages').append(
+     $('<li>').attr('class', 'message').append(
+       $('<img>').attr({src: 'http://www.gravatar.com/avatar/' + $.md5(message.author_email) + '.jpg?s=40', tooltip: message.author_name})).append($('<p>').append(message.body))
+   );
+    });
+  });
+
 %h1= "<a href='/'>ExpressYaself.in <span class='tag'>#{tag}</span><span class='arrow-down'></span></a>"
 
 -if messages.empty?
@@ -11,7 +24,7 @@
           %li= "Email that to xxpressyaself@gmail.com with #{tag} in the subject"
           %li Reload this page!
 -else
-  %ul
+  %ul.messages
     - messages.each do |message|
       %li.message
         %img{ src: message.author_avatar, tooltip: message.author_name }

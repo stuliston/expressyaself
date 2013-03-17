@@ -14,6 +14,5 @@ module ExpressYaself
     def self.from_email(email)
       self.new(Adapters::EmailMessageAdapter.new(email).to_h)
     end
-
   end
 end

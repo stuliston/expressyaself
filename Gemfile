@@ -10,6 +10,7 @@ gem 'pry'
 gem 'mongoid'
 gem 'bson_ext'
 gem 'thor'
+gem 'faye'
 
 group :development, :test do
   gem 'rspec'
