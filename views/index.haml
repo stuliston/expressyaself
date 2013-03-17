@@ -1,7 +1,7 @@
 :javascript
 
   $(function() {
-   var faye = new Faye.Client('http://192.168.1.109:1337/faye/faye');
+   var faye = new Faye.Client("http://#{request.host}:1337/faye/faye");
    faye.subscribe("/messages/#{tag[1, tag.length]}", function (data) {
    var message = JSON.parse(data);
    $('.messages').append(
