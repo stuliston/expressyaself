@@ -1,6 +1,4 @@
-require './models/message'
-
-module ExpressYaSelf
+module ExpressYaself
   class MessageObserver < Mongoid::Observer
     def after_save(message)
       client = Faye::Client.new('http://192.168.1.109:1337/faye/faye')

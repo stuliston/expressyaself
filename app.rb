@@ -3,10 +3,11 @@ require 'sinatra/base'
 require './models/init'
 require './presenters/message_presenter'
 require 'yaml'
+require './models/message'
 require './models/observers/message_observer'
 
 Mongoid.load!("mongoid.yml")
-Mongoid.observers = ExpressYaSelf::MessageObserver
+Mongoid.observers = ExpressYaself::MessageObserver
 Mongoid.instantiate_observers
 
 module ExpressYaself
