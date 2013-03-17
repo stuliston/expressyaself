@@ -7,6 +7,10 @@ body {
   font-family: 'Strait', sans-serif;
 }
 
+h1 {
+  margin-bottom: 30px;
+}
+
 h1 a {
   color: #fff;
   font-size: 40px;
@@ -17,7 +21,8 @@ h1 a {
 h1 a span.tag {
   color: #fff;
   background-color: hotpink;
-  padding: 5px;
+  padding: 6px;
+  border-radius: 6px;
 }
 
 span.arrow-down {
