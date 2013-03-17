@@ -20,7 +20,7 @@ module ExpressYaself
 
     def author_avatar
       hash = Digest::MD5::hexdigest author_email.strip.downcase
-      "http://www.gravatar.com/avatar/#{hash}.jpg?s=40"
+      "http://www.gravatar.com/avatar/#{hash}.jpg?s=50"
     end
 
     private
