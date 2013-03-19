@@ -1,8 +1,10 @@
 defaults: &defaults
   email_inbox: 'xxpressyaselfdev@gmail.com'
+  port: '80'
 
 development:
   <<: *defaults
+  port: '3000'
 
 test:
   <<: *defaults

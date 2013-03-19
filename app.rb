@@ -13,13 +13,10 @@ Mongoid.instantiate_observers
 module ExpressYaself
 
   class App < Sinatra::Base
-
     # set config settings (http://www.sinatrarb.com/configuration.html)
     set YAML.load_file('config.yml')[environment.to_s]
 
     get '/' do
-      x = Message.new(body: "this is a test", author_name: "callum", author_email: "callum@test.com", sent_at: DateTime.now, tags: ["#test"])
-      x.save
       haml :home, locals: { labels: Message.distinct(:tags) }
     end
 
@@ -30,7 +27,7 @@ module ExpressYaself
         MessagePresenter.new(m)
       end
 
-      haml :index, locals: { tag: requested_tag, messages: messages }
+      haml :index, locals: { tag: requested_tag, messages: messages, port: ExpressYaself::App.port }
     end
   end
 end

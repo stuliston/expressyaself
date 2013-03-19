@@ -23,6 +23,11 @@ module ExpressYaself
       "http://www.gravatar.com/avatar/#{hash}.jpg?s=50"
     end
 
+    def html_for_message
+      @engine ||= Haml::Engine.new(File.open('views/message.haml').read)
+      @engine.render(Object.new, message: self)
+    end
+
     private
 
     attr_reader :message

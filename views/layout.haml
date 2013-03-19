@@ -3,8 +3,7 @@
   %head
     %title ExpressYaself.in
     %script(src="javascripts/jquery-1.9.1.min.js")
-    %script(src="javascripts/jquery.md5.js")
-    %script(src="http://#{request.host}:1337/faye/faye.js")
+    %script(src="http://#{request.host}:#{ExpressYaself::App.port}/faye/faye.js")
     %link(rel="stylesheet" href="styles/express.css")
     :javascript
       var _gaq = _gaq || [];

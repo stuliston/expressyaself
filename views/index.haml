@@ -1,13 +1,9 @@
 :javascript
 
   $(function() {
-   var faye = new Faye.Client("http://#{request.host}:1337/faye/faye");
+   var faye = new Faye.Client("http://#{request.host}:#{port}/faye/faye");
    faye.subscribe("/messages/#{tag[1, tag.length]}", function (data) {
-   var message = JSON.parse(data);
-   $('.messages').append(
-     $('<li>').attr('class', 'message').append(
-       $('<img>').attr({src: 'http://www.gravatar.com/avatar/' + $.md5(message.author_email) + '.jpg?s=40', tooltip: message.author_name})).append($('<p>').append(message.body))
-   );
+     $('.messages').append(data);
     });
   });
 
@@ -26,6 +22,4 @@
 -else
   %ul.messages
     - messages.each do |message|
-      %li.message
-        %img{ src: message.author_avatar, tooltip: message.author_name }
-        %p= message.body
+      = haml :message, locals: { message: message }
